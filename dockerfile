@@ -21,11 +21,14 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
-# Install Composer
+# Install Composer from official image
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install PHP dependencies
-RUN composer install --optimize-autoloader --no-dev
+# Allow Composer to run as root (required inside Docker)
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Install PHP dependencies without running scripts (avoids artisan errors during build)
+RUN composer install --optimize-autoloader --no-dev --no-scripts
 
 # Expose port 80 for Apache
 EXPOSE 80
