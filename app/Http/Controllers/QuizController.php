@@ -7,9 +7,28 @@ use Illuminate\Support\Facades\Http;
 
 class QuizController extends Controller
 {
-    function getQuiz(){
+    function start(){
+        
+    $categories = [ '9'  => 'General Knowledge',
+                    '10' => 'Books',
+                    '11' => 'Film',
+                    '12' => 'Music',
+                    '16' => 'Board Games',
+                    '17' => 'Science & Nature',
+                    '18' => 'Computers',
+                    '19' => 'Mathematics',
+                    '27' => 'Animals',
+                    '28' => 'Vehicle',
+                    '29' => 'Comics',
+                    '30' => 'Gadgets'
+                ];
 
-        $questions = Http::get('https://opentdb.com/api.php?amount=10&category=9&type=multiple');
+        return view('/category',['categories' =>$categories]);
+    }
+
+    function getQuiz($key){
+
+        $questions = Http::get("https://opentdb.com/api.php?amount=10&category={$key}&type=multiple&difficulty=medium");
         session(['questions' => $questions->json()['results']]);
         session(['score' => 0]);
 
