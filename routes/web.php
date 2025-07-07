@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 
 Route::view('/','welcome');
+Route::view('/about','about');
 
 
 Route::get('/quiz/result',[QuizController::class,'result'])->name('result');
