@@ -15,7 +15,7 @@
             
             <!-- Quiz Card -->
             <div class="card shadow">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-dark text-white">
                     <h4 class="mb-0">Question {{$id+1}} </h4>
                 </div>
                 
@@ -29,19 +29,27 @@
                         shuffle($options);
                     @endphp
 
-                    <form method="POST" action="{{ route('submit',$id)}}">
-                        @csrf
-                        @foreach ($options as $option)
-                            <label>
-                                <input type="radio" name="answer" value="{{ $option }}" required
-                                    @if (isset($answers[$id]) && $answers[$id] === $option) checked @endif
-                                >
-                                {!! html_entity_decode($option) !!}
-                            </label><br>
-                        @endforeach
+                    <form method="POST" action="{{ route('submit', $id) }}">
+    @csrf
+    @foreach ($options as $option)
+        <div class="form-check mb-2">
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="answer" 
+                id="option-{{ $loop->index }}" 
+                value="{{ $option }}" 
+                required
+                @if (isset($answers[$id]) && $answers[$id] === $option) checked @endif
+            >
+            <label class="form-check-label" for="option-{{ $loop->index }}">
+                {!! html_entity_decode($option) !!}
+            </label>
+        </div>
+    @endforeach
 
-                        <button class="btn btn-success">Submit Answer</button>
-                    </form>
+    <button type="submit" class="btn btn-dark mt-3">Submit Answer</button>
+</form>
 
 
                 </div>

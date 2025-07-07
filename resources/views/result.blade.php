@@ -14,8 +14,8 @@
             <div class="col-md-8">
                 
                 <div class="card shadow">
-                    <div class="card-header bg-success text-white">
-                        <h4 class="mb-0">Quiz Results</h4>
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="mb-0 text-center">Quiz Results</h4>
                     </div>
                     
                     <div class="card-body text-center">
@@ -24,7 +24,7 @@
 
                         <p class="mt-4">You answered <strong>{{ $score }}</strong> out of <strong>{{ $total }}</strong> questions correctly.</p>
 
-                        <a href="/" class="btn btn-primary mt-3">Back to Home</a>
+                        <a href="/" class="btn btn-dark mt-3">Back to Home</a>
                     </div>
                 </div>
 
